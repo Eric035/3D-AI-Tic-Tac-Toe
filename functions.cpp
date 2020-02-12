@@ -85,7 +85,7 @@ bool checkLegal(int cellNbre, char board[]) {
     // Check if user inputs an illegal cell number for the move (out of bound) or the cell is already occupied
     
     if (cellNbre <= 0 && cellNbre <= 27) {  // This means the user desired cell number is in the range of possible cells
-        if (board[cellNbre] == NULL) {
+        if (board[cellNbre] == ' ') {
             return true;
         }
         else {
@@ -97,14 +97,100 @@ bool checkLegal(int cellNbre, char board[]) {
     return false;
 }
 
-// Auxilary function for checkWinner
+// Auxilary function for checkWinner (Horizontal cases)
 bool checkHorzitonalW(char board[]) {
     
+    // Left to right on the same layer
+    for (int i = 0; i < 27; i += 3){
+
+        // We check the both two cells to the right of i on the same layer
+        if ((board[i] == board[i + 1]) && (board[i + 1] == board[i + 2])) {
+            return true;
+        }
+    }
+
+    // Horizontal: Top to bottom 
+    for (int j = 0; j < 9; j += 3) {
+
+        // From the top left side to the bottom right
+        if ((board[j] == board[j + 10]) && (board[j + 10] == board[j + 20])) {
+            return true;
+        }
+
+        // From the top right side to the bottom left
+        else if ((board[(j + 2)] == board[(j + 2) + 8]) && (board[(j + 2) + 8] == board[(j + 2) + 16])) {
+            return true;
+        }
+    }
+
+    // Horizontal: bottom to top
+    for (int k = 18; k < 27; k += 3) {
+
+        // From bottom left to the top right
+        if ((board[k] == board[k - 8]) && (board[k - 8] == board[k - 16])) {
+            return true;
+        }
+
+        // From bottom right to the top left
+        else if ((board[k + 2] == board[(k + 2) - 10]) && (board[(k + 2) - 10] == board[(k + 2) - 20])) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Auxilary function for checkWinner (Veritcal cases)
+bool checkVertical (char board[]) {
+
+    // Check each coloumn on the same layer
+    for (int i = 0; i < 3; i++) {
+        for (int j = i; j < 27; j += 9) {
+            if ((board[j] == board[j + 3]) && (board[j + 3] == board[j + 6])) {
+                return true;
+            }
+        }
+    }
+
+    // From top to bottom 
+    for (int i = 0; i < 3; i++) {
+        if ((board[i] == board[i + 12]) && (board[i + 12] == board[i + 24])) {
+            return true;
+        }
+    }
+
+    // From bottom to top
+    for (int i = 18; i < 20; i++) {
+        if ((board[i] == board[i - 6]) && (board[i - 6] == board[i - 12])) {
+            return true;
+        }
+    }
+
+    // Vertical directly
+    for (int i = 0; i < 9; i++) {
+        if ((board[i] == board[i + 9]) && (board[i + 9] == board[i + 18])) {
+            return true;
+        }
+    }
+
+    return false;   
+}
+
+// Auxilary function for checkWinner (Diagonal cases)
+bool checkDiagonal (char board[]) {
+
+    
+    return false;
 }
 
 // Check for winner 
 bool checkWinner(char board[]) {
     
     // Check for horizontal win
-    
+    if (checkHorzitonalW(board)){
+        cout << "True" << endl;
+        return true;
+    }
+    cout << "false" << endl;
+    return false;
 }
