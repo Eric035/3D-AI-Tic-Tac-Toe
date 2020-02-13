@@ -3,7 +3,7 @@
 #include "functions.h"
 using namespace std;
 
-int main(){
+int main() {
 
     // Game start: Empty board
     char board[27];
@@ -29,6 +29,7 @@ int main(){
             cin >> userInput;
             int usersMove = stoi(userInput) - 1;
 
+            // Check whether the user desired move is legal, if not keep looping until user enters a legal move
             if (checkIfLegal(usersMove, board)) {
                 board[usersMove] = 'X';
                 break;
