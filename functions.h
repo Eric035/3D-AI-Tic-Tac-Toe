@@ -1,4 +1,4 @@
-// Header file for functions 
+// Header file for functions
 
 void greetAndInstruct();
 void displayBoard(char board[]);
