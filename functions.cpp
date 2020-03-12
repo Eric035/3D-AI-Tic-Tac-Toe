@@ -1,7 +1,3 @@
-// Student name: Eric Leung
-// Student ID: 260720788
-// COMP322 Assignment 1
-
 #include <stdlib.h>
 #include <iostream>
 #include "functions.h"
